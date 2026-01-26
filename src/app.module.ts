@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 // 数据库
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { getDatabaseConfig } from './config/database.config';
+import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -17,6 +18,7 @@ import { UserModule } from './modules/user/user.module';
       inject: [ConfigService],
       useFactory: getDatabaseConfig,
     }),
+    AuthModule,
     UserModule,
   ],
   controllers: [],

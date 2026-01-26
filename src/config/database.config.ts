@@ -11,5 +11,5 @@ export const getDatabaseConfig = (
   password: config.get('DB_PASS'),
   database: config.get('DB_NAME'),
   autoLoadEntities: true,
-  // synchronize: process.env.NODE_ENV !== 'production', // 生产环境必须关闭
+  synchronize: process.env.NODE_ENV !== 'production', // 生产环境必须关闭
 });
