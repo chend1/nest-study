@@ -33,6 +33,8 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @Get('info')
   getLoginInfo(@Req() req: any): Promise<UserItemVo> {
+    console.log('req.user', req.user);
+
     return this.userService.getUserDetail(req.user.id);
   }
 

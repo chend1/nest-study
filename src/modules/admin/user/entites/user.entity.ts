@@ -7,7 +7,7 @@ import {
   DeleteDateColumn,
 } from 'typeorm';
 
-@Entity('user')
+@Entity('admin_user')
 export class User {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: number;
@@ -33,18 +33,21 @@ export class User {
   @Column({ type: 'tinyint', default: 1 })
   status: number; // 状态: 1启用 2禁用 3锁定
 
-  @Column({ length: 50, nullable: true })
-  lastLoginIp: string; // 最后登录ip
-
   @Column({ length: 255, nullable: true })
   remark: string; // 备注
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt: Date; // 创建时间
+  created_at: Date; // 创建时间
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updatedAt: Date; // 更新时间
+  updated_at: Date; // 更新时间
+
+  @Column({ length: 50, nullable: true })
+  last_login_ip: string; // 最后登录ip
+
+  @UpdateDateColumn({ name: 'last_login_at' })
+  last_login_at: Date; // 最后登录时间
 
   @DeleteDateColumn({ name: 'deleted_at' })
-  deletedAt: Date; // 删除时间
+  deleted_at: Date; // 删除时间
 }

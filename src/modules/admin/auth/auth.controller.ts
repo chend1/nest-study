@@ -1,4 +1,4 @@
-import { Controller, Body, Post } from '@nestjs/common';
+import { Controller, Body, Post, Req } from '@nestjs/common';
 import { AuthService } from './auth.service';
 
 @Controller()
@@ -6,7 +6,11 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  login(@Body() data: { account: string; password: string }): any {
-    return this.authService.loginByPassword(data.account, data.password);
+  login(
+    @Body() data: { account: string; password: string },
+    @Req() req: Request,
+  ): Promise<{ token: string }> {
+    const ip = (req.headers['x-forwarded-for'] as string)?.split(',')[0] || '';
+    return this.authService.loginByPassword(data.account, data.password, ip);
   }
 }

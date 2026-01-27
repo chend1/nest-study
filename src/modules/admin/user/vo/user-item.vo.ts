@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 export class UserItemVo {
   @Expose() id: number;
 
-  @Expose() account: number;
+  @Expose() account: string;
 
   @Expose() name: string;
 
@@ -16,9 +16,7 @@ export class UserItemVo {
 
   @Expose() status: number;
 
-  @Expose() remark: string;
-
-  @Expose() lastLoginIp: string;
+  @Expose() last_login_ip: string;
 
   @Expose()
   @Transform(({ value }) => {
