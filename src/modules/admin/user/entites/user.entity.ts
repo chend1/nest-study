@@ -5,12 +5,15 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  ManyToMany,
+  JoinTable,
 } from 'typeorm';
+import { Role } from 'src/modules/admin/role/entites/role.entity';
 
 @Entity('admin_user')
 export class User {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  id: number;
+  id: string;
 
   @Column({ length: 50, unique: true })
   account: string; // 账号
@@ -50,4 +53,18 @@ export class User {
 
   @DeleteDateColumn({ name: 'deleted_at' })
   deleted_at: Date; // 删除时间
+
+  @ManyToMany(() => Role)
+  @JoinTable({
+    name: 'admin_role',
+    joinColumn: {
+      name: 'admin_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'role_id',
+      referencedColumnName: 'id',
+    },
+  })
+  roles: Role[];
 }

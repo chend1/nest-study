@@ -6,7 +6,7 @@ class UserIdDto {
   @IsNotEmpty({
     message: 'id不能为空',
   })
-  id: number;
+  id: string;
 }
 export class EditUserDto extends IntersectionType(
   OmitType(CreateUserDto, ['account', 'password']),

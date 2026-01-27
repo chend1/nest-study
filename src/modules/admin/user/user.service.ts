@@ -32,7 +32,7 @@ export class UserService {
   }
 
   // 获取用户详情
-  async getUserDetail(id: number): Promise<UserItemVo> {
+  async getUserDetail(id: string): Promise<UserItemVo> {
     const user = await this.userRepo.findOne({ where: { id } });
     if (!user) {
       throw new NotFoundException('用户不存在');
@@ -75,7 +75,7 @@ export class UserService {
 
   // 修改登录ip
   async updateLoginIp(
-    id: number,
+    id: string,
     data: {
       last_login_ip: string;
       last_login_at: Date;
@@ -89,8 +89,7 @@ export class UserService {
   }
 
   // 删除
-  async delUser(id: number): Promise<string> {
-    console.log('id', id);
+  async delUser(id: string): Promise<string> {
     if (!id) {
       throw new NotFoundException('id不能为空');
     }

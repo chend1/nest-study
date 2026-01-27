@@ -25,7 +25,7 @@ export class UserController {
   }
   // 获取用户详情
   @Get('detail')
-  detail(@Query('id') id: number): Promise<UserItemVo> {
+  detail(@Query('id') id: string): Promise<UserItemVo> {
     return this.userService.getUserDetail(id);
   }
 
@@ -54,7 +54,7 @@ export class UserController {
 
   // 删除用户
   @Post('del')
-  del(@Body() data: { id: number }): Promise<string> {
+  del(@Body() data: { id: string }): Promise<string> {
     return this.userService.delUser(data.id);
   }
 }

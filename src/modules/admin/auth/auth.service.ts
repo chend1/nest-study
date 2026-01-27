@@ -11,7 +11,7 @@ export class AuthService {
   ) {}
 
   // 生成token
-  private generateToken(user: { id: number; name: string }) {
+  private generateToken(user: { id: string; name: string }) {
     const payload = {
       id: user.id,
       name: user.name,

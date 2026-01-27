@@ -3,10 +3,10 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 // 数据库
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { getDatabaseConfig } from './config/database.config';
-// import { AuthModule } from './modules/auth/auth.module';
-// import { UserModule } from './modules/user/user.module';
+// 模块
 import { AuthModule } from './modules/admin/auth/auth.module';
 import { UserModule } from './modules/admin/user/user.module';
+import { RoleModule } from './modules/admin/role/role.module';
 
 @Module({
   imports: [
@@ -22,6 +22,7 @@ import { UserModule } from './modules/admin/user/user.module';
     }),
     AuthModule,
     UserModule,
+    RoleModule,
   ],
   controllers: [],
   providers: [],
