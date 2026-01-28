@@ -10,7 +10,6 @@ export class RoleIdDto {
 }
 
 export class EditRoleDto extends IntersectionType(
-  CreateRoleDto,
   RoleIdDto,
   OmitType(CreateRoleDto, ['code']),
 ) {}

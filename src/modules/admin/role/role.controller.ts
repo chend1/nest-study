@@ -10,26 +10,26 @@ export class RoleController {
 
   // 获取角色列表
   @Get('list')
-  async getRoleList(@Query() params: { name: string }): Promise<RoleItemVo[]> {
+  async findAll(@Query() params: { name: string }): Promise<RoleItemVo[]> {
     // console.log('获取角色列表');
     return this.roleService.getRoleList(params);
   }
 
   // 新增角色
   @Post('add')
-  async createRole(@Body() data: CreateRoleDto): Promise<string> {
+  async create(@Body() data: CreateRoleDto): Promise<string> {
     return this.roleService.createRole(data);
   }
 
   // 编辑角色
   @Post('edit')
-  async editRole(@Body() data: EditRoleDto): Promise<string> {
+  async edit(@Body() data: EditRoleDto): Promise<string> {
     return this.roleService.editRole(data);
   }
 
   // 删除角色
   @Post('del')
-  async delRole(@Body() data: { id: string }): Promise<string> {
+  async del(@Body() data: { id: string }): Promise<string> {
     return this.roleService.delRole(data.id);
   }
 

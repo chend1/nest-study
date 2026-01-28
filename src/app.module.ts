@@ -7,6 +7,7 @@ import { getDatabaseConfig } from './config/database.config';
 import { AuthModule } from './modules/admin/auth/auth.module';
 import { UserModule } from './modules/admin/user/user.module';
 import { RoleModule } from './modules/admin/role/role.module';
+import { PermissionModule } from './modules/admin/permission/permission.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { RoleModule } from './modules/admin/role/role.module';
     AuthModule,
     UserModule,
     RoleModule,
+    PermissionModule,
   ],
   controllers: [],
   providers: [],
