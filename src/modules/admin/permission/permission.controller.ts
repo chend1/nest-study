@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreatePermissionDto } from './dto/permission-create.dto';
-import { EditPermissionDto } from './dto/permission-edit.dto';
+import { EditPermissionDto, PermissionIdDto } from './dto/permission-edit.dto';
 import { PermissionItemVo } from './vo/permission-item.vo';
 import { PermissionService } from './permission.service';
 
@@ -24,5 +24,7 @@ export class PermissionController {
   }
 
   @Post('del')
-  del() {}
+  del(@Body() data: PermissionIdDto): Promise<string> {
+    return this.permissionService.delPermission(data);
+  }
 }

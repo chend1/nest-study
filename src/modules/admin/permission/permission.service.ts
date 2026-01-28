@@ -2,9 +2,9 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like } from 'typeorm';
 import { Permission } from './entites/permission.entity';
-import { buildTree } from 'src/utils';
+import { buildTree } from 'src/common/utils';
 import { CreatePermissionDto } from './dto/permission-create.dto';
-import { EditPermissionDto } from './dto/permission-edit.dto';
+import { EditPermissionDto, PermissionIdDto } from './dto/permission-edit.dto';
 import { PermissionItemVo } from './vo/permission-item.vo';
 
 @Injectable()
@@ -47,9 +47,6 @@ export class PermissionService {
   // 编辑权限
   async editPermission(data: EditPermissionDto): Promise<string> {
     const { id } = data;
-    if (!id) {
-      throw new NotFoundException('id不能为空');
-    }
     const result = await this.permissionRepo.update(id, data);
     if (result.affected === 0) {
       throw new NotFoundException('权限不存在');
@@ -58,11 +55,8 @@ export class PermissionService {
   }
 
   // 删除权限
-  async delPermission(params: { id: string }): Promise<string> {
+  async delPermission(params: PermissionIdDto): Promise<string> {
     const { id } = params;
-    if (!id) {
-      throw new NotFoundException('id不能为空');
-    }
     const result = await this.permissionRepo.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException('权限不存在');

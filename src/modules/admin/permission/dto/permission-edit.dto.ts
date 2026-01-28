@@ -2,14 +2,14 @@ import { IntersectionType } from '@nestjs/mapped-types';
 import { IsNotEmpty } from 'class-validator';
 import { CreatePermissionDto } from './permission-create.dto';
 
-export class RoleIdDto {
+export class PermissionIdDto {
   @IsNotEmpty({
-    message: 'id不能为空1',
+    message: 'id不能为空',
   })
   id: string;
 }
 
 export class EditPermissionDto extends IntersectionType(
-  RoleIdDto,
+  PermissionIdDto,
   CreatePermissionDto,
 ) {}
