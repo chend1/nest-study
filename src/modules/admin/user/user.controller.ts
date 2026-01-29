@@ -16,7 +16,6 @@ import { AssignUserRoleDto } from './dto/user-assign.dto';
 import { UserListVo } from './vo/user-list.vo';
 import { UserItemVo } from './vo/user-item.vo';
 import { UserLoginInfoVo } from './vo/user-info.vo';
-import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 
 @Controller('user')
 export class UserController {
@@ -32,8 +31,6 @@ export class UserController {
     return this.userService.getUserDetail(data.id);
   }
 
-  // 根据token获取用户信息
-  @UseGuards(JwtAuthGuard)
   @Get('info')
   getLoginInfo(@Req() req: any): Promise<UserLoginInfoVo> {
     return this.userService.getUserLoginInfo(req.user.id);

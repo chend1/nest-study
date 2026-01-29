@@ -24,6 +24,19 @@ export class UserService {
     @InjectRepository(User) private userRepo: Repository<User>,
     @InjectRepository(Role) private roleRepo: Repository<Role>,
   ) {}
+
+  buildMenuTree(menus: Permission[], parentId: string | null = null) {
+    return menus
+      .filter((m) => m.parent_id === parentId)
+      .sort((a, b) => a.sort - b.sort)
+      .map((m) => ({
+        id: m.id,
+        name: m.name,
+        path: m.path,
+        icon: m.icon,
+        children: this.buildMenuTree(menus, m.id),
+      }));
+  }
   // 获取用户列表
   async getUserList(params: UserListDto): Promise<UserListVo> {
     const { page, size, name } = params;
@@ -87,23 +100,7 @@ export class UserService {
     });
     const permissions = Array.from(permissionMap.values());
     const menuPermissions = permissions.filter((p) => p.type === 1);
-
-    function _buildMenuTree(
-      menus: Permission[],
-      parentId: string | null = null,
-    ) {
-      return menus
-        .filter((m) => m.parent_id === parentId)
-        .sort((a, b) => a.sort - b.sort)
-        .map((m) => ({
-          id: m.id,
-          name: m.name,
-          path: m.path,
-          icon: m.icon,
-          children: _buildMenuTree(menus, m.id),
-        }));
-    }
-    const menuTree = _buildMenuTree(menuPermissions);
+    const menuTree = this.buildMenuTree(menuPermissions);
 
     return {
       id: user.id,
@@ -150,12 +147,8 @@ export class UserService {
       last_login_ip: string;
       last_login_at: Date;
     },
-  ): Promise<string> {
-    const result = await this.userRepo.update(id, data);
-    if (result.affected === 0) {
-      throw new NotFoundException('用户不存在');
-    }
-    return '更新成功';
+  ) {
+    await this.userRepo.update(id, data);
   }
 
   // 分配角色
