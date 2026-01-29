@@ -5,6 +5,7 @@ export class RoleItemVo {
   @Expose() id: string;
   @Expose() name: string;
   @Expose() code: string;
+  @Expose() remark: string;
   @Expose()
   @Transform(({ value }) => {
     return value ? dayjs(value).format('YYYY-MM-DD HH:mm:ss') : null;
@@ -15,4 +16,15 @@ export class RoleItemVo {
     return value ? dayjs(value).format('YYYY-MM-DD HH:mm:ss') : null;
   })
   updated_at: Date;
+}
+
+export class RoleSimpleVo {
+  @Expose()
+  id: string;
+
+  @Expose()
+  name: string;
+
+  @Expose()
+  code: string;
 }

@@ -7,6 +7,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
+import { Permission } from 'src/modules/admin/permission/entites/permission.entity';
 
 @Entity('role')
 export class Role {
@@ -28,7 +29,17 @@ export class Role {
   @UpdateDateColumn({ name: 'updated_at' })
   updated_at: Date; // 更新时间
 
-  // @ManyToMany(() => Permission)
-  // @JoinTable({ name: 'role_permission' })
-  // permissions: Permission[];
+  @ManyToMany(() => Permission)
+  @JoinTable({
+    name: 'role_permission',
+    joinColumn: {
+      name: 'role_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'permission_id',
+      referencedColumnName: 'id',
+    },
+  })
+  permissions: Permission[];
 }

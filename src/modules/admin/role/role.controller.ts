@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { CreateRoleDto } from './dto/role-create.dto';
-import { EditRoleDto } from './dto/role-edit.dto';
+import { EditRoleDto, RoleIdDto } from './dto/role-edit.dto';
 import { RoleItemVo } from './vo/role-item.vo';
+import { AssignRolePermissionDto } from './dto/role-assign.dto';
 import { RoleService } from './role.service';
 
 @Controller('role')
@@ -29,8 +30,8 @@ export class RoleController {
 
   // 删除角色
   @Post('del')
-  async del(@Body() data: { id: string }): Promise<string> {
-    return this.roleService.delRole(data.id);
+  async del(@Body() data: RoleIdDto): Promise<string> {
+    return this.roleService.delRole(data);
   }
 
   // 获取角色详情
@@ -39,9 +40,15 @@ export class RoleController {
 
   // 获取角色权限
   @Get('permission')
-  async getRolePermission() {}
+  async getRolePermission(@Query() params: RoleIdDto): Promise<string[]> {
+    return this.roleService.getRolePermissions(params.id);
+  }
 
   // 设置角色权限
-  @Post('permission')
-  async setRolePermission() {}
+  @Post('assign-permission')
+  async setRolePermission(
+    @Body() data: AssignRolePermissionDto,
+  ): Promise<string> {
+    return this.roleService.assignPermissions(data);
+  }
 }

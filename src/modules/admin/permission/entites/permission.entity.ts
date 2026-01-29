@@ -23,6 +23,9 @@ export class Permission {
   @Column({ nullable: true })
   method: string;
 
+  @Column({ nullable: true })
+  icon: string;
+
   @Column({ default: 30 })
   sort: number;
 }

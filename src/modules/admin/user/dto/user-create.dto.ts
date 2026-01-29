@@ -1,5 +1,11 @@
 // dto/create-account.dto.ts
-import { IsNotEmpty, IsString, MinLength, Length } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  MinLength,
+  Length,
+  IsOptional,
+} from 'class-validator';
 
 export class CreateUserDto {
   @IsNotEmpty({
@@ -10,6 +16,7 @@ export class CreateUserDto {
   })
   account: string;
 
+  @IsOptional()
   @IsString({
     message: '密码必须是字符串',
   })
@@ -18,29 +25,33 @@ export class CreateUserDto {
   })
   password: string;
 
-  @IsString({
-    message: '用户名必须是字符串',
-  })
   @IsNotEmpty({
     message: '用户名不能为空',
   })
+  @IsString({
+    message: '用户名必须是字符串',
+  })
   name: string;
 
+  @IsOptional()
   @IsString({
     message: '邮箱必须是字符串',
   })
   email: string;
 
+  @IsOptional()
   @Length(11, 11, {
     message: '手机号必须是11位',
   })
   phone: string;
 
+  @IsOptional()
   @IsString({
     message: '头像必须是字符串',
   })
   avatar: string;
 
+  @IsOptional()
   @IsString({
     message: '备注必须是字符串',
   })

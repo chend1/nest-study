@@ -13,6 +13,7 @@ export class CreatePermissionDto {
   @Length(2, 20, { message: '权限名长度为2-20位' })
   name: string;
 
+  @IsNotEmpty({ message: '权限编码不能为空' })
   @Length(2, 20, { message: '权限编码长度为2-20位' })
   code: string;
 
@@ -20,6 +21,7 @@ export class CreatePermissionDto {
   @IsIn([1, 2, 3], { message: '类型只能是 1 / 2 / 3' })
   type: number;
 
+  @IsOptional()
   @IsNumber({}, { message: '排序必须是数字' })
   sort: number;
 
@@ -33,9 +35,15 @@ export class CreatePermissionDto {
   @IsString({ message: '描述必须是字符串' })
   remark?: string;
 
+  @IsOptional()
   @IsString({ message: '路径必须是字符串' })
   path: string;
 
+  @IsOptional()
+  @IsString({ message: 'icon必须是字符串' })
+  icon: string;
+
+  @IsOptional()
   @IsString({ message: '方法名必须是字符串' })
   method: string;
 }

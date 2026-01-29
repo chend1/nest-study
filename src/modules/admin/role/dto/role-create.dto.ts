@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, MinLength, Length } from 'class-validator';
+import { IsNotEmpty, IsString, Length, IsOptional } from 'class-validator';
 
 export class CreateRoleDto {
   @IsNotEmpty({
@@ -17,8 +17,9 @@ export class CreateRoleDto {
   })
   code: string;
 
+  @IsOptional()
   @IsString({
     message: '描述必须是字符串',
   })
-  remark: string;
+  remark?: string;
 }

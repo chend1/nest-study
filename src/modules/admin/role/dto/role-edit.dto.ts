@@ -1,5 +1,5 @@
 import { OmitType, IntersectionType } from '@nestjs/mapped-types';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { CreateRoleDto } from './role-create.dto';
 
 export class RoleIdDto {
@@ -10,6 +10,6 @@ export class RoleIdDto {
 }
 
 export class EditRoleDto extends IntersectionType(
-  RoleIdDto,
   OmitType(CreateRoleDto, ['code']),
+  RoleIdDto,
 ) {}

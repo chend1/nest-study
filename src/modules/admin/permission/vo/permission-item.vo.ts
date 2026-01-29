@@ -20,3 +20,10 @@ export class PermissionItemVo {
   updated_at: Date;
   children: PermissionItemVo[] = [];
 }
+
+export class PermissionSimpleVo {
+  @Expose() id: string;
+  @Expose() name: string;
+  @Expose() path: string;
+  @Expose() children: PermissionSimpleVo[] = [];
+}
