@@ -1,4 +1,12 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+  Index,
+} from 'typeorm';
+import { PermissionType } from '../enum/permission-type.enum';
 
 @Entity('permission')
 export class Permission {
@@ -8,14 +16,19 @@ export class Permission {
   @Column({ length: 50 })
   name: string;
 
-  @Column({ length: 100, unique: true })
+  @Column({ length: 100, unique: true, nullable: true })
   code: string;
 
   @Column({ type: 'tinyint' })
-  type: number; // 1菜单 2接口 3按钮
+  type: PermissionType;
 
+  @Index()
   @Column({ nullable: true })
   parent_id: string;
+
+  @ManyToOne(() => Permission)
+  @JoinColumn({ name: 'parent_id' })
+  parent: Permission;
 
   @Column({ nullable: true })
   path: string;
@@ -28,4 +41,7 @@ export class Permission {
 
   @Column({ default: 30 })
   sort: number;
+
+  @Column({ default: 1 })
+  is_show: number; // 1显示 0不显示
 }

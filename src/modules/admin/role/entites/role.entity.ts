@@ -14,20 +14,26 @@ export class Role {
   @PrimaryGeneratedColumn({ type: 'bigint' })
   id: string;
 
-  @Column({ length: 50 })
-  name: string;
+  @Column({ length: 50, unique: true })
+  name: string; // 角色名称
 
   @Column({ length: 50, unique: true })
-  code: string;
+  code: string; // 角色标识（admin / editor）
 
-  @Column({ nullable: true })
+  @Column({ type: 'tinyint', default: 1 })
+  status: number; // 1启用 0禁用
+
+  @Column({ type: 'int', default: 0 })
+  sort: number; // 排序
+
+  @Column({ length: 255, nullable: true })
   remark: string;
 
   @CreateDateColumn({ name: 'created_at' })
-  created_at: Date; // 创建时间
+  created_at: Date;
 
   @UpdateDateColumn({ name: 'updated_at' })
-  updated_at: Date; // 更新时间
+  updated_at: Date;
 
   @ManyToMany(() => Permission)
   @JoinTable({

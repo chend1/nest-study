@@ -7,16 +7,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { plainToInstance } from 'class-transformer';
 import { Repository, Like, In } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
+// 数据库实体
 import { User } from './entites/user.entity';
+import { Role } from '../role/entites/role.entity';
+import { Permission } from '../permission/entites/permission.entity';
+// dto
 import { UserListDto } from './dto/user-list.dto';
 import { CreateUserDto } from './dto/user-create.dto';
 import { EditUserDto } from './dto/user-edit.dto';
 import { AssignUserRoleDto } from './dto/user-assign.dto';
+// vo
 import { UserListVo } from './vo/user-list.vo';
 import { UserItemVo } from './vo/user-item.vo';
-import { UserInfoVo, UserLoginInfoVo } from './vo/user-info.vo';
-import { Role } from '../role/entites/role.entity';
-import { Permission } from '../permission/entites/permission.entity';
+import { UserInfoVo } from './vo/user-info.vo';
+import { LoginUserVo } from './vo/user-login-info.vo';
 
 @Injectable()
 export class UserService {
@@ -24,19 +28,6 @@ export class UserService {
     @InjectRepository(User) private userRepo: Repository<User>,
     @InjectRepository(Role) private roleRepo: Repository<Role>,
   ) {}
-
-  buildMenuTree(menus: Permission[], parentId: string | null = null) {
-    return menus
-      .filter((m) => m.parent_id === parentId)
-      .sort((a, b) => a.sort - b.sort)
-      .map((m) => ({
-        id: m.id,
-        name: m.name,
-        path: m.path,
-        icon: m.icon,
-        children: this.buildMenuTree(menus, m.id),
-      }));
-  }
   // 获取用户列表
   async getUserList(params: UserListDto): Promise<UserListVo> {
     const { page, size, name } = params;
@@ -67,7 +58,7 @@ export class UserService {
   }
 
   // 获取用户登录信息
-  async getUserLoginInfo(id: string): Promise<UserLoginInfoVo> {
+  async getUserLoginInfo(id: string): Promise<LoginUserVo> {
     const user = await this.userRepo.findOne({
       where: { id },
       relations: ['roles', 'roles.permissions'],
@@ -132,8 +123,8 @@ export class UserService {
   }
 
   // 编辑账号
-  async editUser(data: EditUserDto): Promise<string> {
-    const result = await this.userRepo.update(data.id, data);
+  async editUser(id: string, data: EditUserDto): Promise<string> {
+    const result = await this.userRepo.update(id, data);
     if (result.affected === 0) {
       throw new NotFoundException('用户不存在');
     }
@@ -181,5 +172,18 @@ export class UserService {
       throw new NotFoundException('用户不存在');
     }
     return '删除成功';
+  }
+
+  private buildMenuTree(menus: Permission[], parentId: string | null = null) {
+    return menus
+      .filter((m) => m.parent_id === parentId)
+      .sort((a, b) => a.sort - b.sort)
+      .map((m) => ({
+        id: m.id,
+        name: m.name,
+        path: m.path,
+        icon: m.icon,
+        children: this.buildMenuTree(menus, m.id),
+      }));
   }
 }

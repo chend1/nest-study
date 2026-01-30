@@ -5,6 +5,7 @@ import {
   MinLength,
   Length,
   IsOptional,
+  IsIn,
 } from 'class-validator';
 
 export class CreateUserDto {
@@ -37,23 +38,27 @@ export class CreateUserDto {
   @IsString({
     message: '邮箱必须是字符串',
   })
-  email: string;
+  email?: string;
 
   @IsOptional()
   @Length(11, 11, {
     message: '手机号必须是11位',
   })
-  phone: string;
+  phone?: string;
 
   @IsOptional()
   @IsString({
     message: '头像必须是字符串',
   })
-  avatar: string;
+  avatar?: string;
+
+  @IsOptional()
+  @IsIn([1, 2, 3])
+  status?: number;
 
   @IsOptional()
   @IsString({
     message: '备注必须是字符串',
   })
-  remark: string;
+  remark?: string;
 }

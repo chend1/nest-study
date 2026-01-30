@@ -1,25 +1,23 @@
-import { IsNotEmpty, IsString, Length, IsOptional } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString, IsNumber } from 'class-validator';
 
 export class CreateRoleDto {
-  @IsNotEmpty({
-    message: '角色名不能为空',
-  })
-  @Length(2, 20, {
-    message: '角色名长度为2-20位',
-  })
+  @IsNotEmpty({ message: '角色名称不能为空' })
+  @IsString()
   name: string;
 
-  @IsNotEmpty({
-    message: '角色编码不能为空',
-  })
-  @Length(2, 20, {
-    message: '角色编码长度为2-20位',
-  })
+  @IsNotEmpty({ message: '角色编码不能为空' })
+  @IsString()
   code: string;
 
   @IsOptional()
-  @IsString({
-    message: '描述必须是字符串',
-  })
+  @IsString()
   remark?: string;
+
+  @IsOptional()
+  @IsNumber({}, { message: '排序必须是数字' })
+  sort?: number;
+
+  @IsOptional()
+  @IsNumber({}, { message: '状态必须是数字' })
+  status?: number;
 }

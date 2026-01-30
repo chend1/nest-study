@@ -18,7 +18,7 @@ export class User {
   @Column({ length: 50, unique: true })
   account: string; // 账号
 
-  @Column({ length: 100 })
+  @Column({ length: 100, select: false })
   password: string; // 密码
 
   @Column({ length: 50, nullable: true })
@@ -27,7 +27,7 @@ export class User {
   @Column({ length: 100, nullable: true, unique: true })
   email: string; // 邮箱
 
-  @Column({ length: 11 })
+  @Column({ length: 11, nullable: true })
   phone: string; // 手机号
 
   @Column({ length: 255, nullable: true })
@@ -48,7 +48,7 @@ export class User {
   @Column({ length: 50, nullable: true })
   last_login_ip: string; // 最后登录ip
 
-  @UpdateDateColumn({ name: 'last_login_at' })
+  @Column({ type: 'datetime', nullable: true })
   last_login_at: Date; // 最后登录时间
 
   @DeleteDateColumn({ name: 'deleted_at' })
