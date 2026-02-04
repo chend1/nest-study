@@ -117,8 +117,8 @@ export class UserService {
       throw new NotFoundException('账号已存在');
     }
     data.password = await bcrypt.hash(password, 10);
-    this.userRepo.create(data);
-    await this.userRepo.save(data);
+    const userInfo = this.userRepo.create(data);
+    await this.userRepo.save(userInfo);
     return '添加成功';
   }
 

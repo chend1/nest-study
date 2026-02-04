@@ -47,8 +47,8 @@ export class RoleService {
     if (role) {
       throw new BadRequestException('角色/code已存在');
     }
-    this.roleRepo.create(data);
-    await this.roleRepo.save(data);
+    const roleInfo = this.roleRepo.create(data);
+    await this.roleRepo.save(roleInfo);
     return '添加成功';
   }
 
