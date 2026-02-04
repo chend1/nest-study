@@ -21,8 +21,8 @@ export class UserController {
     return this.userService.getUserList(params);
   }
   // 获取用户详情
-  @Get('detail')
-  detail(@Param(':id') id: string): Promise<UserItemVo> {
+  @Get('detail/:id')
+  detail(@Param('id') id: string): Promise<UserItemVo> {
     return this.userService.getUserDetail(id);
   }
 
@@ -39,8 +39,8 @@ export class UserController {
   }
 
   // 编辑用户
-  @Post('edit')
-  edit(@Query(':id') id: string, @Body() data: EditUserDto): Promise<string> {
+  @Post('edit/:id')
+  edit(@Query('id') id: string, @Body() data: EditUserDto): Promise<string> {
     return this.userService.editUser(id, data);
   }
 
@@ -51,8 +51,8 @@ export class UserController {
   }
 
   // 删除用户
-  @Post('del')
-  del(@Body() data: UserIdDto): Promise<string> {
-    return this.userService.delUser(data.id);
+  @Post('del/:id')
+  del(@Query('id') id: string): Promise<string> {
+    return this.userService.delUser(id);
   }
 }

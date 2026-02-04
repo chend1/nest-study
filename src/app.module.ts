@@ -8,6 +8,7 @@ import { AuthModule } from './modules/admin/auth/auth.module';
 import { UserModule } from './modules/admin/user/user.module';
 import { RoleModule } from './modules/admin/role/role.module';
 import { PermissionModule } from './modules/admin/permission/permission.module';
+import { CategoryModule } from './modules/admin/category/category.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { PermissionModule } from './modules/admin/permission/permission.module';
     UserModule,
     RoleModule,
     PermissionModule,
+    CategoryModule,
   ],
   controllers: [],
   providers: [],

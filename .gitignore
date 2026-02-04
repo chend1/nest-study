@@ -3,6 +3,9 @@
 /node_modules
 /build
 
+# 项目文档
+/md
+
 # Logs
 logs
 *.log

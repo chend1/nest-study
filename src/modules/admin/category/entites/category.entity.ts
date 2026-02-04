@@ -1,17 +1,19 @@
 import {
   Entity,
   Column,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   CreateDateColumn,
   UpdateDateColumn,
+  Index,
 } from 'typeorm';
 
 @Entity('category')
 export class Category {
-  @PrimaryColumn({ type: 'varchar', length: 50 })
+  @PrimaryGeneratedColumn('increment', { type: 'bigint' })
   id: string;
 
-  @Column({ type: 'varchar', length: 50, nullable: true })
+  @Index()
+  @Column({ type: 'bigint', nullable: true })
   parent_id: string | null;
 
   @Column({ type: 'varchar', length: 255 })
@@ -27,7 +29,7 @@ export class Category {
   sort: number;
 
   @Column({ type: 'int', default: 1 })
-  status: number;
+  status: number; // 1启用 2禁用
 
   @Column({ type: 'varchar', length: 255, nullable: true })
   remark: string;

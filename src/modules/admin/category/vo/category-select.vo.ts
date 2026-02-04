@@ -1,8 +1,9 @@
 import { Expose, Type } from 'class-transformer';
 
 export class CategorySelectVo {
-  @Expose() value: string;
-  @Expose() label: string;
+  @Expose() id: string;
+  @Expose() name: string;
+  @Expose() level: string;
 
   @Expose()
   @Type(() => CategorySelectVo)

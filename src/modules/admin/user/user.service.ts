@@ -164,9 +164,6 @@ export class UserService {
 
   // 删除
   async delUser(id: string): Promise<string> {
-    if (!id) {
-      throw new NotFoundException('id不能为空');
-    }
     const result = await this.userRepo.delete(id);
     if (result.affected === 0) {
       throw new NotFoundException('用户不存在');

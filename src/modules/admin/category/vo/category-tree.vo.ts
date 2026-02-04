@@ -1,14 +1,8 @@
 import { Expose, Type } from 'class-transformer';
+import { CategoryItemVo } from './category-item.vo';
 
-export class CategoryTreeVo {
-  @Expose() id: string;
-  @Expose() name: string;
-  @Expose() parent_id: string;
-  @Expose() level: number;
-  @Expose() sort: number;
-  @Expose() status: number;
-
+export class CategoryTreeVo extends CategoryItemVo {
   @Expose()
   @Type(() => CategoryTreeVo)
-  children: CategoryTreeVo[];
+  children?: CategoryTreeVo[];
 }
