@@ -7,7 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like } from 'typeorm';
 import { plainToInstance } from 'class-transformer';
 // 数据库实体
-import { Permission } from './entites/permission.entity';
+import { Permission } from './entities/permission.entity';
 // dto
 import { CreatePermissionDto } from './dto/permission-create.dto';
 import { UpdatePermissionDto } from './dto/permission-edit.dto';
@@ -15,7 +15,7 @@ import { PermissionListQueryDto } from './dto/permission-query.dto';
 // vo
 import { PermissionItemVo } from './vo/permission-item.vo';
 import { PermissionTreeVo } from './vo/permission-tree.vo';
-import { Role } from '../role/entites/role.entity';
+import { Role } from '../role/entities/role.entity';
 
 @Injectable()
 export class PermissionService {

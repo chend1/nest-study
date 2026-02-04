@@ -7,7 +7,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like, IsNull, DataSource } from 'typeorm';
 import { plainToInstance } from 'class-transformer';
 // 数据库实体
-import { Category } from './entites/category.entity';
+import { Category } from './entities/category.entity';
 // dto
 import { CreateCategoryDto } from './dto/category-create.dto';
 import { CategoryEditDto } from './dto/category-edit.dto';

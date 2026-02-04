@@ -8,7 +8,7 @@ import {
   ManyToMany,
   JoinTable,
 } from 'typeorm';
-import { Role } from 'src/modules/admin/role/entites/role.entity';
+import { Role } from 'src/modules/admin/role/entities/role.entity';
 
 @Entity('admin_user')
 export class User {

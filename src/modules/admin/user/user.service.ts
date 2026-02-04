@@ -8,9 +8,9 @@ import { plainToInstance } from 'class-transformer';
 import { Repository, Like, In } from 'typeorm';
 import * as bcrypt from 'bcryptjs';
 // 数据库实体
-import { User } from './entites/user.entity';
-import { Role } from '../role/entites/role.entity';
-import { Permission } from '../permission/entites/permission.entity';
+import { User } from './entities/user.entity';
+import { Role } from '../role/entities/role.entity';
+import { Permission } from '../permission/entities/permission.entity';
 // dto
 import { UserListDto } from './dto/user-list.dto';
 import { CreateUserDto } from './dto/user-create.dto';

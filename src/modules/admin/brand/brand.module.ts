@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BrandController } from './brand.controller';
 import { BrandService } from './brand.service';
 
-import { Brand } from './entites/brand.entity';
+import { Brand } from './entities/brand.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Brand])],

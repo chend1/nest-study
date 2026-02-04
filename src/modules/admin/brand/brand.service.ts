@@ -4,7 +4,7 @@ import { Repository, Like } from 'typeorm';
 import { plainToInstance } from 'class-transformer';
 
 // 数据库实体
-import { Brand } from './entites/brand.entity';
+import { Brand } from './entities/brand.entity';
 
 // dto
 import { CreateBrandDto } from './dto/brand-create.dto';

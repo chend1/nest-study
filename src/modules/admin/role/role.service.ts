@@ -7,9 +7,9 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like, In, Not, DataSource, EntityManager } from 'typeorm';
 import { plainToInstance } from 'class-transformer';
 // 数据库实体
-import { Permission } from '../permission/entites/permission.entity';
-import { Role } from './entites/role.entity';
-import { User } from '../user/entites/user.entity';
+import { Permission } from '../permission/entities/permission.entity';
+import { Role } from './entities/role.entity';
+import { User } from '../user/entities/user.entity';
 // dto
 import { CreateRoleDto } from './dto/role-create.dto';
 import { UpdateRoleDto } from './dto/role-edit.dto';
