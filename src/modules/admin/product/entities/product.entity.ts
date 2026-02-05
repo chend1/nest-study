@@ -13,7 +13,7 @@ import {
 
 import { Brand } from 'src/modules/admin/brand/entities/brand.entity';
 import { Category } from 'src/modules/admin/category/entities/category.entity';
-// import { ProductSku } from './product-sku.entity';
+import { ProductSku } from './product-sku.entity';
 
 @Entity('product')
 export class Product {
@@ -27,7 +27,7 @@ export class Product {
 
   /** 产品编码（可选，用于内部管理） */
   @Index({ unique: true })
-  @Column({ length: 100, nullable: true })
+  @Column({ type: 'varchar', length: 100, nullable: true })
   code: string | null;
 
   /** 分类 */
@@ -49,7 +49,7 @@ export class Product {
   brand: Brand;
 
   /** 产品主图 */
-  @Column({ length: 500, nullable: true })
+  @Column({ type: 'varchar', length: 500, nullable: true })
   cover: string | null;
 
   /** 产品图集 */
@@ -57,7 +57,7 @@ export class Product {
   images: string[] | null;
 
   /** 简介 */
-  @Column({ length: 500, nullable: true })
+  @Column({ type: 'varchar', length: 500, nullable: true })
   summary: string | null;
 
   /** 详情（富文本） */
@@ -74,8 +74,8 @@ export class Product {
   sort: number;
 
   /** SKU 列表 */
-  // @OneToMany(() => ProductSku, sku => sku.product)
-  // skus: ProductSku[];
+  @OneToMany(() => ProductSku, (sku) => sku.product)
+  skus: ProductSku[];
 
   @CreateDateColumn()
   created_at: Date;

@@ -28,6 +28,8 @@ export class BrandService {
     if (status !== undefined) {
       where['status'] = status;
     }
+    console.log('where', where);
+
     const list = await this.brandRepo.find({
       where,
       order: { sort: 'ASC' },

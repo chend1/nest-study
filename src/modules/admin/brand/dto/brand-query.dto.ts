@@ -1,5 +1,5 @@
-import { IsOptional, IsString, IsInt } from 'class-validator';
-import { Type } from 'class-transformer';
+import { IsOptional, IsString, IsInt, IsIn } from 'class-validator';
+import { Transform } from 'class-transformer';
 
 export class QueryBrandDto {
   @IsOptional()
@@ -7,7 +7,8 @@ export class QueryBrandDto {
   name?: string;
 
   @IsOptional()
+  @Transform(({ value }) => (value ? Number(value) : null))
   @IsInt()
-  @Type(() => Number)
+  @IsIn([1, 2], { message: 'status 只能是 1启用 或 2禁用' })
   status?: number;
 }

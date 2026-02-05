@@ -10,6 +10,7 @@ import { RoleModule } from './modules/admin/role/role.module';
 import { PermissionModule } from './modules/admin/permission/permission.module';
 import { CategoryModule } from './modules/admin/category/category.module';
 import { BrandModule } from './modules/admin/brand/brand.module';
+import { ProductModule } from './modules/admin/product/product.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { BrandModule } from './modules/admin/brand/brand.module';
     PermissionModule,
     CategoryModule,
     BrandModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [],
